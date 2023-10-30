@@ -4,7 +4,7 @@ export class FormPageOperations {
     addNewRecord() {
         formPageLocator.elements.addNewRecordBtn().click();
     }
-    enterDetails(firstName, lastName, email, age, salary, department) {
+    enterDetails({ firstName, lastName, email, age, salary, department }) {
         formPageLocator.elements.firstName().click().clear().type(firstName);
         formPageLocator.elements.lastName().click().clear().type(lastName);
         formPageLocator.elements.userEmail().click().clear().type(email);
