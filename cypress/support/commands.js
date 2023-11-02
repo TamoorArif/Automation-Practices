@@ -23,3 +23,28 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('signin', (userType, options = {}) => {
+    const types = {
+        admin: {
+            email: 'super_admin@yopmail.com',
+            password: 'PLib$$786'
+        },
+        user: {
+            email: 'PLadmin@yopmail.com',
+            password: 'PLib$$786'
+        },
+    }
+    const user = types[userType]
+    cy.request({
+        url: 'https://gateway-dev.personnellibrary.co.uk/auth/signin',
+        method: 'PUT',
+        body: user,
+        failOnStatusCode: false
+    })
+        .its('body')
+        .then((body) => {
+            return `Bearer ${body.data.authToken}`
+        })
+        
+})
