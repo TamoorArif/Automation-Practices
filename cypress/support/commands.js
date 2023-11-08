@@ -44,7 +44,25 @@ Cypress.Commands.add('signin', (userType, options = {}) => {
     })
         .its('body')
         .then((body) => {
-            return `Bearer ${body.data.authToken}`
+            return `Bearer ${body.data.authToken}`;
         })
-        
-})
+
+});
+
+Cypress.Commands.add("signout", (authToken) => {
+    if (!authToken) {
+        cy.log("No authentication token found. Make sure to sign in first.");
+        return;
+    }
+
+    cy.request({
+        method: "PUT",
+        url: 'https://gateway-dev.personnellibrary.co.uk/auth/signout',
+        headers: {
+            Authorization: authToken,
+        },
+        failOnStatusCode: false
+    }).then((response) => {
+        expect(response.status).to.eq(202);
+    });
+});

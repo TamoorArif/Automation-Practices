@@ -1,4 +1,4 @@
-import { formPageOperations } from "./PageObject/operations/form-page";
+import { formPageOperations } from "../../PageObject/operations/form-page";
 import { formPageAssertion } from "./pageobject/Assertion/form-page.assert";
 
 describe('Table Data Entry Test', () => {

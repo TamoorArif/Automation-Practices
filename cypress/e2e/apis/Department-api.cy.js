@@ -1,5 +1,5 @@
-let accessToken;
 describe("Testing Apis", function () {
+    let accessToken;
     before(() => {
         cy.signin('user').then((token) => {
             accessToken =  token;
@@ -22,4 +22,8 @@ describe("Testing Apis", function () {
             expect(response.status).to.eq(201);
         });
     }); 
-}); 
+
+    after(() => {
+        cy.signout(accessToken);
+    })
+});
